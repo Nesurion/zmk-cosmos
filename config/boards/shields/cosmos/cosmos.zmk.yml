@@ -1,0 +1,11 @@
+file_format: "1"
+id: cosmos
+name: cosmos
+type: shield
+url: https://github.com/nesurion/cosmos
+requires: [seeeduino_xiao_ble]
+features:
+  - keys
+siblings:
+  - cosmos_left
+  - cosmos_right

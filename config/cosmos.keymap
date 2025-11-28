@@ -1,0 +1,151 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+#define BASE 0
+#define NAV  1
+#define SYM  2
+#define ADJ  3
+#define TVP1 4
+#define TVP2 5
+
+&mt {
+    quick-tap-ms = <100>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <170>;
+};
+
+&caps_word { continue-list = <UNDERSCORE BACKSPACE DELETE MINUS>; };
+
+&sk {
+    /delete-property/ ignore-modifiers;
+
+    quick-release;
+};
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_esc {
+            timeout-ms = <80>;
+            key-positions = <34 33>;
+            bindings = <&kp ESC>;
+        };
+
+        delete {
+            bindings = <&kp DELETE>;
+            key-positions = <35 36>;
+            timeout-ms = <100>;
+        };
+
+        caps_word {
+            bindings = <&caps_word>;
+            key-positions = <32 37>;
+            timeout-ms = <200>;
+        };
+
+        bt_clear_all {
+            bindings = <&bt BT_CLR_ALL>;
+            key-positions = <32 33 34 35 37 36>;
+            timeout-ms = <400>;
+        };
+    };
+
+    behaviors {
+        hml: homewrow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_LEFT_HAND";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <230>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 26 27 28 29 30 31 36 37 35 32 33 34>;
+            flavor = "balanced";
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-on-release;
+        };
+
+        hmr: homewrow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_RIGHT_HAND";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <230>;
+            hold-trigger-key-positions = <0 1 3 4 10 11 12 13 14 20 21 22 23 24 25 32 33 2 34 35 36 37>;
+            flavor = "balanced";
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            hold-trigger-on-release;
+        };
+
+        shortmt: shortmt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SHORTMT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <140>;
+            flavor = "balanced";
+            quick-tap-ms = <100>;
+        };
+
+        shortlt: shortlt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SHORTLT";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <140>;
+            quick-tap-ms = <100>;
+            flavor = "tap-preferred";
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+        base_layer {
+            label = "BASE";
+
+            bindings = <
+                          &kp Q  &kp W         &kp E            &kp R            &kp T          &kp Y             &kp U             &kp I            &kp O                &kp P
+                          &kp A  &hml LCTRL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &kp G          &kp H             &hmr RIGHT_GUI J  &hmr RALT K      &hmr LEFT_CONTROL L  &kp SEMICOLON
+                          &kp Z  &kp X         &kp C            &kp V            &kp B          &kp N             &kp M             &kp COMMA        &kp DOT              &kp FSLH     
+                                               &sk LEFT_SHIFT   &shortlt 1 TAB   &lt 3 SPACE    &shortlt 2 ENTER  &kp BACKSPACE     &sk RIGHT_SHIFT
+            >;
+        };
+
+        nav_layer {
+            label = "NAV";
+            bindings = <
+        &kp LG(GRAVE)   &trans     &trans        &trans    &trans       &trans              &kp RC(D)       &kp RC(U)     &trans               &kp RG(PLUS)
+        &kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT  &kp LGUI  &trans       &kp LEFT_ARROW      &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW      &kp SINGLE_QUOTE
+        &trans          &trans     &trans        &trans    &trans       &kp LA(LEFT_ARROW)  &kp PAGE_DOWN   &kp PAGE_UP   &kp LA(RIGHT_ARROW)  &kp RG(MINUS)   
+                                   &trans        &trans    &kp SPACE    &kp ENTER           &kp BACKSPACE   &trans
+            >;
+        };
+
+        sym_layer {
+            label = "SYM";
+            bindings = <
+               &kp EXCL   &kp AT    &kp LEFT_BRACE        &kp HASH       &kp CARET         &kp DOLLAR    &kp PERCENT    &kp RIGHT_BRACE        &kp AMPERSAND      &kp SEMICOLON
+               &kp TILDE  &kp PLUS  &kp LEFT_PARENTHESIS  &kp SLASH      &kp MINUS         &kp EQUAL     &kp RGUI       &kp RIGHT_PARENTHESIS  &kp DOUBLE_QUOTES  &kp COLON
+               &kp GRAVE  &kp PIPE  &kp LEFT_BRACKET      &kp BACKSLASH  &kp UNDERSCORE    &kp ASTERISK  &kp DOT        &kp RIGHT_BRACKET      &kp SINGLE_QUOTE   &kp COMMA
+                                    &trans                &kp TAB        &kp SPACE         &none         &kp BACKSPACE  &trans
+            >;
+        };
+
+        num_layer {
+            bindings = <
+        &none           &none      &kp C_VOLUME_UP    &kp F11           &kp F12       &kp SLASH     &kp N7         &kp N8        &kp N9        &kp MINUS
+        &kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT       &kp LEFT_GUI      &none         &kp COLON     &kp NUMBER_4   &kp N5        &kp NUMBER_6  &kp PLUS
+        &none           &none      &kp C_VOLUME_DOWN  &kp C_PLAY_PAUSE  &kp C_NEXT    &kp ASTERISK  &kp NUMBER_1   &kp NUMBER_2  &kp NUMBER_3  &kp PERIOD
+                                   &none              &none             &none         &kp N0        &kp BACKSPACE  &none
+            >;
+
+            label = "NUM";
+        };
+    };
+};
