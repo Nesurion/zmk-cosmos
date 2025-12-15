@@ -27,11 +27,11 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_esc {
-            timeout-ms = <80>;
-            key-positions = <34 33>;
-            bindings = <&kp ESC>;
-        };
+        /* combo_esc { */
+        /*     timeout-ms = <80>; */
+        /*     key-positions = <34 33>; */
+        /*     bindings = <&kp ESC>; */
+        /* }; */
 
         delete {
             bindings = <&kp DELETE>;
@@ -47,7 +47,7 @@
 
         bt_clear_all {
             bindings = <&bt BT_CLR_ALL>;
-            key-positions = <34 35>;
+            key-positions = <34 33>;
             timeout-ms = <400>;
         };
     };
