@@ -34,7 +34,7 @@
         };
 
         delete {
-            bindings = <&kp DELETE>;
+            bindings = <&kp ENTER>;
             key-positions = <34 35>;
             timeout-ms = <100>;
         };
