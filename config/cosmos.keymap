@@ -27,11 +27,11 @@
     combos {
         compatible = "zmk,combos";
 
-        /* combo_esc { */
-        /*     timeout-ms = <80>; */
-        /*     key-positions = <34 33>; */
-        /*     bindings = <&kp ESC>; */
-        /* }; */
+        combo_esc {
+            timeout-ms = <80>;
+            key-positions = <34 33>;
+            bindings = <&kp ESC>;
+        };
 
         delete {
             bindings = <&kp DELETE>;
@@ -45,11 +45,6 @@
             timeout-ms = <200>;
         };
 
-        bt_clear_all {
-            bindings = <&bt BT_CLR_ALL>;
-            key-positions = <34 33>;
-            timeout-ms = <400>;
-        };
     };
 
     behaviors {
@@ -139,7 +134,7 @@
 
         num_layer {
             bindings = <
-        &none           &none      &kp C_VOLUME_UP    &kp F11           &kp F12       &kp SLASH     &kp N7         &kp N8        &kp N9        &kp MINUS
+        &bt BT_PRV      &bt BT_NXT &kp C_VOLUME_UP    &kp F11           &kp F12       &kp SLASH     &kp N7         &kp N8        &kp N9        &kp MINUS
         &kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT       &kp LEFT_GUI      &none         &kp COLON     &kp NUMBER_4   &kp N5        &kp NUMBER_6  &kp PLUS
         &none           &none      &kp C_VOLUME_DOWN  &kp C_PLAY_PAUSE  &kp C_NEXT    &kp ASTERISK  &kp NUMBER_1   &kp NUMBER_2  &kp NUMBER_3  &kp PERIOD
                                    &none              &none             &none         &kp N0        &kp BACKSPACE  &none
