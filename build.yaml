@@ -1,7 +1,7 @@
 include:
-  - board: seeeduino_xiao
+  - board: xiao_ble
     shield: cosmos_left
-  - board: seeeduino_xiao
+  - board: xiao_ble
     shield: cosmos_right
-  - board: seeeduino_xiao
+  - board: xiao_ble
     shield: settings_reset
